@@ -3,9 +3,9 @@
 
 source 'https://rubygems.org'
 
-group :development, :test do
-  gem 'rake'
+gem 'rake'
 
+group :development, :test do
   gem 'activerecord',    '~> 7.2.0', require: nil
   gem 'activejob',       '~> 7.2.0', require: nil
   gem 'sequel',          require: nil
