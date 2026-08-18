@@ -74,6 +74,24 @@ describe Que::Locker do
       locker.stop!
     end
 
+    it "should connect successfully when connection_host/connection_port are passed explicitly" do
+      uri = URI.parse(QUE_URL)
+      locker_settings[:connection_host] = uri.host
+      locker_settings[:connection_port] = uri.port || 5432
+      locker
+
+      pid = nil
+      sleep_until { pid = DB[:que_lockers].select_map(:pid).first }
+      assert_equal locker.instance_variable_get(:@connection).backend_pid, pid
+
+      locker.stop!
+    end
+
+    it "should raise if connection_port overrides to a port nothing is listening on" do
+      locker_settings[:connection_port] = 1
+      assert_raises(PG::Error) { locker }
+    end
+
     it "should support an on_worker_start callback" do
       called = 0
       locker_settings[:on_worker_start] = proc { called += 1 }

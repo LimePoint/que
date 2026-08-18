@@ -367,6 +367,16 @@ MSG
       end
     end
 
+    describe "--connection-host and --connection-port" do
+      it "should be accepted and used to connect the locker, without touching the connection pool" do
+        uri = URI.parse(QUE_URL)
+
+        assert_successful_invocation("./#{filename} --connection-host #{uri.host} --connection-port #{uri.port || 5432}") do
+          refute_includes DEFAULT_QUE_POOL.instance_variable_get(:@checked_out), @que_locker[:pid]
+        end
+      end
+    end
+
     it "when passing --log-internals should output Que's internal logs" do
       Que.internal_logger = nil
 

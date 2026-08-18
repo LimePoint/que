@@ -127,6 +127,24 @@ module Que
             end
 
             opts.on(
+              '--connection-host [HOST]',
+              String,
+              "Override the host of the locker's dedicated connection, keeping " \
+                "the credentials/database Que would otherwise derive.",
+            ) do |host|
+              options[:connection_host] = host
+            end
+
+            opts.on(
+              '--connection-port [PORT]',
+              Integer,
+              "Override the port of the locker's dedicated connection, keeping " \
+                "the credentials/database Que would otherwise derive.",
+            ) do |port|
+              options[:connection_port] = port
+            end
+
+            opts.on(
               '--log-internals',
               "Log verbosely about Que's internal state. " \
                 "Only recommended for debugging issues",
