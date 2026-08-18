@@ -75,7 +75,7 @@ module Que
         }
       end
 
-      convert_result(result)
+      convert_result(result) unless result.nil?
     end
 
     def execute_prepared(command, params = nil)

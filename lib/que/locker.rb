@@ -316,7 +316,7 @@ module Que
     end
 
     def shutdown
-      unlock_jobs(@job_buffer.clear)
+      unlock_jobs(@job_buffer&.clear || [])
       wait_for_shutdown
       handle_results
     end

@@ -60,6 +60,12 @@
 
 <!-- /MarkdownTOC -->
 
+## Unreleased (LimePoint fork)
+
+- **Fixed**:
+    + `Que::Connection#execute` no longer calls `convert_result` on a `nil` result.
+    + `Que::Locker#shutdown` no longer raises if `@job_buffer` is `nil`.
+
 ## 2.4.1 (2024-10-28)
 
 - **Fixed**:
