@@ -260,7 +260,7 @@ OUTPUT
 
         loop do
           sleep 0.01
-          break if $stop_que_executable || locker.stopping?
+          break if $stop_que_executable || locker.stopping? || !locker.thread.alive?
         end
 
         output.puts "\nFinishing Que's current jobs before exiting..."

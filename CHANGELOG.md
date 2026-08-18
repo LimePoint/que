@@ -65,6 +65,7 @@
 - **Fixed**:
     + `Que::Connection#execute` no longer calls `convert_result` on a `nil` result.
     + `Que::Locker#shutdown` no longer raises if `@job_buffer` is `nil`.
+    + `que`'s CLI polling loop (`Que::CommandLineInterface`) now also exits if the locker's background thread has died, instead of looping forever on a dead locker.
 
 ## 2.4.1 (2024-10-28)
 
