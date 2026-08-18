@@ -18,6 +18,7 @@ services:
     environment:
       DATABASE_URL: postgres://que:que@db/que-test
       USE_RAILS: ~
+      SPEC_TIME_SKEW: 10
 
   db:
     image: "postgres:${POSTGRES_VERSION-13}"
