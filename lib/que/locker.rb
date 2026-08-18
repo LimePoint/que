@@ -55,6 +55,8 @@ module Que
     def initialize(
       queues:              [Que.default_queue],
       connection_url:      nil,
+      connection_host:     nil,
+      connection_port:     nil,
       listen:              true,
       poll:                true,
       poll_interval:       DEFAULT_POLL_INTERVAL,
@@ -69,6 +71,9 @@ module Que
       # directly.
       Que.assert [TrueClass, FalseClass], listen
       Que.assert [TrueClass, FalseClass], poll
+
+      Que.assert [String, NilClass], connection_host
+      Que.assert [Integer, NilClass], connection_port
 
       Que.assert Numeric, poll_interval
       Que.assert Numeric, wait_period
@@ -173,6 +178,8 @@ module Que
             }
           end
         end
+
+      connection_args = connection_args.merge({ host: connection_host, port: connection_port }.compact)
 
       @connection = Que::Connection.wrap(PG::Connection.open(connection_args))
 

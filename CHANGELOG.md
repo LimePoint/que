@@ -66,6 +66,11 @@
     + `Que::Connection#execute` no longer calls `convert_result` on a `nil` result.
     + `Que::Locker#shutdown` no longer raises if `@job_buffer` is `nil`.
     + `que`'s CLI polling loop (`Que::CommandLineInterface`) now also exits if the locker's background thread has died, instead of looping forever on a dead locker.
+- **Added**:
+    + `Que::Locker.new` accepts `connection_host:`/`connection_port:`, and the `que` CLI grows
+      matching `--connection-host [HOST]` / `--connection-port [PORT]` flags. Either or both
+      override the corresponding key on the locker's derived `connection_args` (whether derived
+      from the pool or from `--connection-url`), leaving credentials/database untouched.
 
 ## 2.4.1 (2024-10-28)
 
